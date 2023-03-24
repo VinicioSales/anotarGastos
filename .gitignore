@@ -1,3 +1,10 @@
 venv
 anotarGastos\src\static\__pycache__
 anotarGastos\src\files\credencials.json
+anotarGastos\src\files\token.json
+anotarGastos\src\controllers\__pycache__
+.env
+anotarGastos/src/controllers/__pycache__/database.cpython-311.pyc
+anotarGastos/src/files/credencitals.json
+anotarGastos/src/files/token.json
+anotarGastos/src/files/credencials.json
