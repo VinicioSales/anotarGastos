@@ -1,9 +1,11 @@
 from google_auth_oauthlib.flow import InstalledAppFlow
-from controllers.database import database_infos
+from src.controllers.database import database_infos
 import json
+from bs4 import BeautifulSoup
+import html2text
 
-def liberar_acesso_manual():
-    #NOTE - liberar_acesso_manual
+def grant_manual_access_gmail_api():
+    #NOTE - grant_manual_access_gmail_api
     """
     This function requests user authorization to access Gmail API.
     
@@ -39,8 +41,8 @@ def liberar_acesso_manual():
     return creds
 
 
-def criar_token(creds):
-    #NOTE - criar_token
+def create_token(creds):
+    #NOTE - create_token
     """
     This function creates a JSON token file containing the user's credentials information.
     
@@ -61,3 +63,22 @@ def criar_token(creds):
             'client_secret': creds.client_secret,
             'scopes': creds.scopes
         }, token_file)
+
+def html_convertor(data):
+    #NOTE - html_convertor
+    """
+    This function converts HTML data to plain text format.
+
+    It takes HTML data as input and uses the BeautifulSoup library to parse the data into an 
+    HTML tree. Then, it uses the html2text library to convert the tree into plain text format.
+    
+    Args:
+        str: data: HTML data to be converted to plain text format.
+        
+    Returns:
+        str: text
+    """
+    soup = BeautifulSoup(data, 'html.parser')
+    text = html2text.html2text(soup.prettify())
+
+    return text

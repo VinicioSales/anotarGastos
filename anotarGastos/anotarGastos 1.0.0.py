@@ -3,9 +3,11 @@ from googleapiclient.discovery import build
 import base64
 import json
 from src.static import paths
+from src.funcs import html_convertor
 
 
-with open(f'{paths.files}\token.json', 'r') as token_file:
+
+with open(f'{paths.files}/token.json', 'r') as token_file:
     token_info = json.load(token_file)
 
 creds = Credentials.from_authorized_user_info(info=token_info)
@@ -13,11 +15,11 @@ creds = Credentials.from_authorized_user_info(info=token_info)
 # Criar um objeto da API do Gmail
 service = build('gmail', 'v1', credentials=creds)
 
-n_messages = 5
+n_messages = 1
 
 
 # Recuperar a lista de IDs das mensagens
-results = service.users().messages().list(userId='me', maxResults=n_messages).execute()
+results = service.users().messages().list(userId='me', q='todomundo@nubank.com.br', maxResults=n_messages).execute()
 messages = results.get('messages', [])
 
 
@@ -53,4 +55,8 @@ for message in messages:
     print(f'Subject: {subject}')
     print(f'From: {sender}')
     print(f'Date: {date}')
-    print(f'Body: {data}\n\n')
+    #print(f'Body: {data}\n\n')
+
+    converted_body = html_convertor(data=data)
+
+    print(f"converted_body: {converted_body}")
