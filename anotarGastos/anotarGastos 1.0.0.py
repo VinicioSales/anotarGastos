@@ -4,10 +4,12 @@ import base64
 import json
 from src.static import paths
 from src.funcs import html_convertor
+import re
 
 
 
-with open(f'{paths.files}/token.json', 'r') as token_file:
+
+with open(f'{paths.files}/token_gmail.json', 'r') as token_file:
     token_info = json.load(token_file)
 
 creds = Credentials.from_authorized_user_info(info=token_info)
@@ -60,3 +62,10 @@ for message in messages:
     converted_body = html_convertor(data=data)
 
     print(f"converted_body: {converted_body}")
+    regular_expression = r"\d{1,3}(?:\.\d{3})*(?:,\d{2})?"
+
+    result = re.search(regular_expression, converted_body)
+    print(f"result: {result}")
+    valor = result.group()
+
+    print(valor)
