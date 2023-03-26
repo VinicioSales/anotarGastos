@@ -3,6 +3,10 @@ from src.controllers.database import database_infos
 import json
 from bs4 import BeautifulSoup
 import html2text
+from oauth2client.service_account import ServiceAccountCredentials
+import re
+import gspread
+from src.static import paths
 
 def grant_manual_access_gmail_api():
     #NOTE - grant_manual_access_gmail_api
@@ -82,3 +86,42 @@ def html_convertor(data):
     text = html2text.html2text(soup.prettify())
 
     return text
+
+def integrating_google_spreadsheet(sheet_id):
+    #NOTE - integrando_google_planilha
+    """
+    Integra a planilha do google
+    
+    params:
+        - string: sheet_id
+    
+    returns:
+        - sheet: planilha"""
+    
+    worksheet_id = database_infos['worksheet_id']
+    scope = ['https://spreadsheets.google.com/feeds']
+    credentials = ServiceAccountCredentials.from_json_keyfile_name(f'{paths.arquivos}/credenciais.json', scope)
+    gc = gspread.authorize(credentials)
+    wks = gc.open_by_key(worksheet_id)
+    sheet = wks.worksheet(sheet_id)
+    print(f"sheet: {sheet}")
+
+    return sheet
+
+def get_value(text):
+    #NOTE - get_value
+    """
+    Extracts a monetary value from a given text using regular expression.
+
+    args:
+        - str: text
+
+    returns:
+        - str: value
+    """
+    regular_expression = r"\d{1,3}(?:\.\d{3})*(?:,\d{2})?"
+    result = re.search(regular_expression, text)
+    value = result.group()
+
+    return value
+
