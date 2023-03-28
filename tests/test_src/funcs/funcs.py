@@ -1,12 +1,12 @@
 from google_auth_oauthlib.flow import InstalledAppFlow
-from src.controllers.database import database_infos
+from test_src.controllers.database import database_infos
 import json
 from bs4 import BeautifulSoup
 import html2text
 from oauth2client.service_account import ServiceAccountCredentials
 import re
 import gspread
-from src.static import paths
+from test_src.static import paths
 
 def grant_manual_access_gmail_api():
     #NOTE - grant_manual_access_gmail_api

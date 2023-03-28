@@ -7,7 +7,7 @@ from src.static import paths
 from src.funcs import html_convertor
 from src.funcs import get_value
 from src.funcs import integrating_google_spreadsheet
-import re
+from src.static import variables
 
 
 
@@ -65,7 +65,9 @@ value = get_value(text=converted_body)
 print(value)
 
 #NOTE - Google Sheet Interactions
+with open(rf'{paths.files}\line_transations.txt', 'r') as file:
+    line_transations = file.read()
 sheet_resume = integrating_google_spreadsheet(sheet_id="Resumo")
 sheet_transations = integrating_google_spreadsheet(sheet_id="Transações")
-linha_planilha = 28
-sheet_resume.update_cell(linha_planilha, 14, "Oportunidade já existente")
+linha_planilha = 33
+sheet_resume.update_cell(linha_planilha, variables.colum_real_resume, "=SE(ÉCÉL.VAZIA($B33); ""; SOMASE('Transações'!$E$"+line_transations+":$E;$B33;'Transações'!$C"+line_transations+":$C))")

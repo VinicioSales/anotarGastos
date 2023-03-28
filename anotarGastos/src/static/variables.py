@@ -1,0 +1,1 @@
+colum_real_resume = 5
