@@ -7,6 +7,9 @@ from oauth2client.service_account import ServiceAccountCredentials
 import re
 import gspread
 from src.static import paths
+from src.static import variables as var
+
+
 
 def grant_manual_access_gmail_api():
     #NOTE - grant_manual_access_gmail_api
@@ -124,4 +127,24 @@ def get_value(text):
     value = result.group()
 
     return value
+
+def searching_similar_values(sheet_resume, value):
+    #NOTE - searching_similar_values
+    """Search for a row in the sheet_resume containing a value similar to the given value parameter.
+
+    params:
+        - str: value
+
+    returns:
+        - str: expenses_title
+    """
+    search_row = sheet_resume.find(f'R$ {value}', in_column=var.colum_planejado) 
+    if str(search_row) != 'None':
+        line_num = search_row.row
+        line_values = sheet_resume.row_values(line_num)
+        expenses_title = line_values[1]
+
+        return expenses_title
+    else:
+        return None
 
