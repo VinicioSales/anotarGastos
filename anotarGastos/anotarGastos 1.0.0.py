@@ -9,6 +9,7 @@ from src.funcs import get_value
 from src.funcs import integrating_google_spreadsheet
 from src.funcs import searching_similar_values
 from src.funcs import get_store
+from src.funcs import get_expense_title_from_list
 from src.static import variables as var
 from datetime import datetime
 
@@ -52,14 +53,16 @@ print(f'value: {value}')
 store = get_store(converted_body=converted_body)
 print(f'store: {store}')
 
-
 #NOTE - Google Sheet Interactions
 with open(rf'{paths.files}\line_transacoes.txt', 'r') as file:
     line_transacoes = file.read()
 sheet_resume = integrating_google_spreadsheet(sheet_id="Resumo")
 sheet_transacoes = integrating_google_spreadsheet(sheet_id="Transações")
 
-expenses_title = searching_similar_values(sheet_resume, value)
+#NOTE - Getting expenses_title
+expenses_title = get_expense_title_from_list(store=store)
+if expenses_title == None:
+    expenses_title = searching_similar_values(sheet_resume, value)
 print(f"expenses_title: {expenses_title}")
 
 #NOTE - Feeding sheet

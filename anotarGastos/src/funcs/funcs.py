@@ -164,3 +164,10 @@ def searching_similar_values(sheet_resume, value):
         return expenses_title
     else:
         return None
+    
+def get_expense_title_from_list(store):
+    if store in var.store_list1:
+        return var.expenses_title1
+    elif store in var.store_list2:
+        return var.expenses_title2
+

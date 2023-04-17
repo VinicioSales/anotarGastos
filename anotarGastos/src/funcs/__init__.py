@@ -6,3 +6,4 @@ from .funcs import searching_similar_values
 from .funcs import grant_manual_access_gmail_api
 from .funcs import create_token
 from .funcs import get_store
+from .funcs import get_expense_title_from_list
