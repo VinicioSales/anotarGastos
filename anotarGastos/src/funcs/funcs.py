@@ -128,6 +128,23 @@ def get_value(text):
 
     return value
 
+def get_store(converted_body):
+    #NOTE - get_store
+    """Extracts the name of the store, from a string.
+
+    Args:
+        converted_body (str): A string containing the converted email body.
+
+    Returns:
+        str: The name of the store, as extracted from the input string.
+    """
+    padrao = r"(?<=\*\*)(.*?)(?=\*\*)"
+    match = re.search(padrao, converted_body)
+    if match:
+        store = match.group(1)
+
+        return store
+
 def searching_similar_values(sheet_resume, value):
     #NOTE - searching_similar_values
     """Search for a row in the sheet_resume containing a value similar to the given value parameter.
