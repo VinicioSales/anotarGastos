@@ -22,9 +22,8 @@ n_messages = 1
 
 
 #NOTE - Filter
-results = service.users().messages().list(userId='me', q='todomundo@nubank.com.br', maxResults=n_messages).execute()
+results = service.users().messages().list(userId='me', q=f'from:{var.sender_email} subject:{var.email_subject}', maxResults=n_messages).execute()
 messages = results.get('messages', [])
-
 
 #NOTE - Geting messeges
 for message in messages:
@@ -32,7 +31,7 @@ for message in messages:
     payload = msg['payload']
     headers = payload['headers']
 
-    #NOTE -  Getting the body
+    #NOTE - Getting the body
     if 'parts' in payload:
         parts = payload['parts']
         data = None

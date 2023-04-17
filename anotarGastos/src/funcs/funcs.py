@@ -147,4 +147,3 @@ def searching_similar_values(sheet_resume, value):
         return expenses_title
     else:
         return None
-

@@ -4,3 +4,5 @@ colum_valor_transacoes = 3
 colum_categoria_transacoes = 5
 general = 'Mão'
 colum_planejado = 4
+sender_email = 'todomundo@nubank.com.br'
+email_subject = 'Transferência realizada com sucesso'
