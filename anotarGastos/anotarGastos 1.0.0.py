@@ -65,3 +65,5 @@ if expenses_title == None:
 else:
     sheet_transacoes.update_cell(line_transacoes, var.colum_categoria_transacoes, expenses_title)
 line_transacoes = int(line_transacoes) + 1
+with open(f'{paths.files}/line_transacoes.txt', 'w') as arquivo:
+    arquivo.write(str(line_transacoes))
